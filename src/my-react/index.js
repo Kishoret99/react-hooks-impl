@@ -17,6 +17,8 @@ export const hooks = (function(){
       console.log(hooksArr);
     }
 
+    hookIndex = hookIndex + 1;
+
     return [state, setState]
   }
 
