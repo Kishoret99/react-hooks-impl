@@ -1,6 +1,6 @@
 const { render } = require("./render");
 
-export const MyReact = (function(){
+export const hooks = (function(){
 
   // hooks
   const hooksArr = [];
@@ -10,7 +10,7 @@ export const MyReact = (function(){
     // to maintain closure for setstate
     const _hookIndex = hookIndex;
 
-    const state = hooksArr[hookIndex]?.value || initialValue;
+    const state = hooksArr[hookIndex] !== undefined ?  hooksArr[hookIndex] : initialValue;
 
     const setState = (newState) => {
       hooksArr[_hookIndex] = newState;
@@ -20,17 +20,18 @@ export const MyReact = (function(){
     return [state, setState]
   }
 
-  function runner() {
+  function startRender() {
     hookIndex = 0;
     render(hooksArr)();
-    setTimeout(runner, 300);
+    window.requestAnimationFrame(startRender);
   }
-  setTimeout(runner, 300);
-
+  setTimeout(startRender, 300);
 
   return {
     useState,
-    render: render(hooksArr)
+    render: render(hooksArr),
   }
 
 })();
+
+export default hooks;

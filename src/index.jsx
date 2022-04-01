@@ -1,10 +1,8 @@
-const { MyReact } =  require('./my-react')
-const React = require('react');
+import React from "jsx-dom"
+const { useState, render } = require('./my-react').default;
 
-function  Component ( )  {
-  const [count, setCount] = MyReact.useState(1);
-  console.log('@@@@', count);
-
+function Component ()  {
+  const [count, setCount] = useState(2)
   return (
     <div>
       <button onClick = {() => setCount (count-1)}> - </button>
@@ -14,4 +12,4 @@ function  Component ( )  {
   );
 }
 
-MyReact.render(<Component />, document.getElementById('app'));
+render(Component, document.getElementById('app'));
